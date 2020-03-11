@@ -208,4 +208,10 @@ def check_kroger_coupon (coupon):
 	clipurl = 'https://mobile.kroger.com/mobilecoupons/api/v1/coupon/kroger'
 	r = session.post('%s/%s' % (clipurl, coupon))
 	rjson = r.json()
-	return(rjson["addedToCard"], rjson["shortDescription"])
+	if rjson.get('addedToCard') is None:
+		return1 = False
+		return2 = rjson['details']
+	else:
+		return1 = rjson["addedToCard"]
+		return2 = rjson["shortDescription"]
+	return(return1, return2)
